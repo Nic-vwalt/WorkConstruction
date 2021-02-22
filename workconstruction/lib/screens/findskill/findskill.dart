@@ -5,7 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:screens/profile/viewprofile.dart';
+import 'package:workconstruction/lib/screens/profile/viewprofile.dart';
+
 
 class FindSkillScreen extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _FindSkillScreenState extends State<FindSkillScreen> {
   String _img;
   final FirebaseFirestore fStore = FirebaseFirestore.instance;
 
-  Stream<QuerySnapshot> _stream = fStore.collection('users').where('UserType', isEqualTo: 'crewmember').snapshots();
+  Stream<QuerySnapshot> _stream = FirebaseFirestore.instance.collection('users').where('UserType', isEqualTo: 'crewmember').snapshots();
 
 //  void dispose() {
 //    // TODO: implement dispose
@@ -106,7 +107,7 @@ class _FindSkillScreenState extends State<FindSkillScreen> {
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
             if (!snapshot.hasData) return Text('Loading...');
             return ListView(
-              children: snapshot.data.documents.map((document){
+              children: snapshot.data.docs.map((document){
                 return ListTile(
                     leading: Image.network(
                       img(document),

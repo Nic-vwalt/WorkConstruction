@@ -19,11 +19,11 @@ class _viewprofileState extends State<StatefulWidget> {
   String _img;
   final FirebaseAuth fAuth = FirebaseAuth.instance;
   firebase_storage.Reference fStorageRef;
-  final Firestore fStore = Firestore.instance;
+  final FirebaseFirestore fStore = FirebaseFirestore.instance;
 
   Future<String> _loadImage(DocumentSnapshot document) async {
     String ref = document["IDRef"].toString();
-    fStorageRef = FirebaseStorage().ref().child(ref);
+    fStorageRef = firebase_storage.FirebaseStorage.instance.ref().child(ref);
     String img = await fStorageRef.getDownloadURL();
     if (img != null) {
       return img;
