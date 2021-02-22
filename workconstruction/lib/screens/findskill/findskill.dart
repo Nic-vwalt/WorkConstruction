@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:workconstruction/lib/screens/profile/viewprofile.dart';
+import 'package:workconstruction/screens/profile/viewprofile.dart';
 
 
 class FindSkillScreen extends StatefulWidget {
