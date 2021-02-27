@@ -14,9 +14,10 @@ class login extends StatelessWidget {
         Scaffold(
           bottomNavigationBar: BottomAppBar(),
           backgroundColor: Colors.transparent,
-          body: Column(
+          body: ListView(
             children: [
-              Expanded(
+              Container(
+                height: 200,
                 child: Align(
                   alignment: FractionalOffset.bottomCenter,
                   child: Center(
@@ -30,48 +31,60 @@ class login extends StatelessWidget {
                 ),
               ),
               Expanded(
-                  child: Align(
-                alignment: FractionalOffset.bottomCenter,
-                child: Container(
-                  alignment: Alignment.bottomCenter,
-                  child: Text(
-                    'Phonenumber:',
-                    style: kLabel,
-                  ),
-                ),
-              )),
-              Expanded(
-                child: Align(
-                  alignment: FractionalOffset.topCenter,
                   child: Container(
-                    color: Colors.black45,
-                    height: 50,
-                    width: 200,
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.all(15.15),
-                    child: Row(
-                      children: [
-                        SizedBox(),
-                        TextField(),
-                      ],
+                    alignment: Alignment.bottomCenter,
+                    child: Text(
+                      'Phonenumber',
+                      style: kLabel,
                     ),
-                  ),
-                ),
+                  )
               ),
-              Expanded(
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: RaisedButton(
-                      color: Colors.black54,
-                      child: Text(
-                        'Login',
-                        style: kButton,
+              Row(
+                mainAxisAlignment:  MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    height: 50,
+                    width: 100,
+                    color: Colors.black45,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CountryCodePicker(
+                          initialSelection: 'ZA',
+                          showFlag: true,
+                          alignLeft: true,
+                        ),
                       ),
-                      onPressed: () => key,
                     ),
                   ),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    height: 50,
+                    width: 175,
+                    color: Colors.black45,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                height: 250,
+                alignment: Alignment.center,
+                child: RaisedButton(                  
+                  color: Colors.black54,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Login',
+                      style: kButton,
+                    ),
+                  ),
+                  onPressed: () => key,
                 ),
               )
             ],
