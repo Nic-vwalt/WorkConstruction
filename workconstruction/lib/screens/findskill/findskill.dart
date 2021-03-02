@@ -112,7 +112,7 @@ class _FindSkillScreenState extends State<FindSkillScreen> {
                     leading: Image.network(
                       img(document),
                     ),
-                    title: Text(document['FirstName']+' '+document['LastName']),
+                    //title: Text(document['FirstName']+' '+document['LastName']),
                     subtitle: Text('Skills: '+document['Skills'].toString().replaceAll('[','').replaceAll(']','')),
                     trailing: Icon(Icons.keyboard_arrow_right),
                     onTap: () {
