@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:workconstruction/classes/authentication_service.dart';
+import 'package:workconstruction/screens/welcome/homepage.dart';
 import 'package:workconstruction/screens/welcome/login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -51,7 +52,8 @@ class AuthenticationWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User>();
 
     if (firebaseUser != null) {
-      return const Text("Signed in");
+      return homepage();
     }
+    return login();
   }
 }

@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:workconstruction/classes/authentication_service.dart';
 import 'package:workconstruction/palette.dart';
 import 'package:workconstruction/screens/widgets/widgets.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:country_code_picker/country_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_core/firebase_core.dart';
 
 class login extends StatelessWidget {
+  final TextEditingController phonenumberController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -32,18 +40,17 @@ class login extends StatelessWidget {
               ),
               Expanded(
                   child: Container(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.15),
-                      child: Text(
-                        'Phonenumber',
-                        style: kLabel,
-                      ),
-                    ),
-                  )
-              ),
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.all(15.15),
+                  child: Text(
+                    'Phonenumber',
+                    style: kLabel,
+                  ),
+                ),
+              )),
               Row(
-                mainAxisAlignment:  MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
                     height: 50,
@@ -69,6 +76,7 @@ class login extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
+                        controller: phonenumberController,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -78,7 +86,7 @@ class login extends StatelessWidget {
               Container(
                 height: 250,
                 alignment: Alignment.center,
-                child: RaisedButton(                  
+                child: RaisedButton(
                   color: Colors.black54,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -88,7 +96,9 @@ class login extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    
+                    context.read<AuthenticationService>().signIn(
+                      phonenumber: phonenumberController.text,
+                    );
                   },
                 ),
               )
