@@ -33,9 +33,12 @@ class login extends StatelessWidget {
               Expanded(
                   child: Container(
                     alignment: Alignment.bottomCenter,
-                    child: Text(
-                      'Phonenumber',
-                      style: kLabel,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.15),
+                      child: Text(
+                        'Phonenumber',
+                        style: kLabel,
+                      ),
                     ),
                   )
               ),
@@ -45,7 +48,7 @@ class login extends StatelessWidget {
                   Container(
                     height: 50,
                     width: 100,
-                    color: Colors.black45,
+                    color: Colors.black26,
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
@@ -62,7 +65,7 @@ class login extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     height: 50,
                     width: 175,
-                    color: Colors.black45,
+                    color: Colors.black26,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
@@ -84,7 +87,9 @@ class login extends StatelessWidget {
                       style: kButton,
                     ),
                   ),
-                  onPressed: () => key,
+                  onPressed: () {
+                    
+                  },
                 ),
               )
             ],
