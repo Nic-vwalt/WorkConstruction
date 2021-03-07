@@ -1,36 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:workconstruction/classes/authentication_service.dart';
 import 'package:workconstruction/palette.dart';
+import 'package:workconstruction/screens/welcome/otp.dart';
 import 'package:workconstruction/screens/widgets/widgets.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:country_code_picker/country_localizations.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_core/firebase_core.dart';
 
-class login extends StatelessWidget {
+class Login extends StatelessWidget {
   final TextEditingController phonenumberController = TextEditingController();
+  final TextEditingController otpController = TextEditingController();
+  String areaCode = "+27";
+
+  void _onCountryChange(CountryCode countryCode) {
+    areaCode = countryCode.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        BackgroundImage(),
+        const BackgroundImage(),
         Scaffold(
-          bottomNavigationBar: BottomAppBar(),
+          bottomNavigationBar: const BottomAppBar(),
           backgroundColor: Colors.transparent,
           body: ListView(
             children: [
               Container(
                 height: 200,
-                child: Align(
+                child: const Align(
                   alignment: FractionalOffset.bottomCenter,
                   child: Center(
                       child: Padding(
-                    padding: const EdgeInsets.all(25.0),
+                    padding: EdgeInsets.all(25.0),
                     child: Text(
                       'Welcome',
                       style: kHeading,
@@ -62,8 +68,8 @@ class login extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: CountryCodePicker(
                           initialSelection: 'ZA',
-                          showFlag: true,
                           alignLeft: true,
+                          onChanged: _onCountryChange,
                         ),
                       ),
                     ),
@@ -76,6 +82,7 @@ class login extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
+                        keyboardType: TextInputType.number,
                         controller: phonenumberController,
                         textAlign: TextAlign.center,
                       ),
@@ -88,20 +95,37 @@ class login extends StatelessWidget {
                 alignment: Alignment.center,
                 child: RaisedButton(
                   color: Colors.black54,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  onPressed: () {
+                    print(areaCode);
+                    if (phonenumberController.text.isEmpty == false &&
+                        phonenumberController.text.length == 9) {
+                      MaterialPageRoute(builder: (context) => OTP());
+                      final String fullnumber =
+                          areaCode +
+                              phonenumberController.text;
+                      context.read<AuthenticationService>().signIn(
+                            phonenumber: fullnumber,
+                          );
+                    } else {
+                      final snackBar = SnackBar(
+                        content: const Text('Please enter your number!'),
+                        action: SnackBarAction(
+                          label: 'Dismiss',
+                          onPressed: () {},
+                        ),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text(
                       'Login',
                       style: kButton,
                     ),
                   ),
-                  onPressed: () {
-                    context.read<AuthenticationService>().signIn(
-                      phonenumber: phonenumberController.text,
-                    );
-                  },
                 ),
-              )
+              ),
             ],
           ),
         ),

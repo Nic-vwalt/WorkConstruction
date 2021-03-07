@@ -6,12 +6,17 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:country_code_picker/country_localizations.dart';
 import 'package:flutter/material.dart';
 
-class homepage extends StatelessWidget {
+class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Column(
+      children: [
+        Container(
+          height: 500,
+          color: Colors.yellow,
+        )
+      ],
+    );
   }
-  
 }
 
