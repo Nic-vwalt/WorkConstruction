@@ -30,9 +30,9 @@ class Login extends StatelessWidget {
           backgroundColor: Colors.transparent,
           body: ListView(
             children: [
-              Container(
+              const SizedBox(
                 height: 200,
-                child: const Align(
+                child: Align(
                   alignment: FractionalOffset.bottomCenter,
                   child: Center(
                       child: Padding(
@@ -47,8 +47,8 @@ class Login extends StatelessWidget {
               Expanded(
                   child: Container(
                 alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.all(15.15),
+                child: const Padding(
+                  padding: EdgeInsets.all(15.15),
                   child: Text(
                     'Phonenumber',
                     style: kLabel,
@@ -106,6 +106,14 @@ class Login extends StatelessWidget {
                       context.read<AuthenticationService>().signIn(
                             phonenumber: fullnumber,
                           );
+                      final snackBar = SnackBar(
+                        content: const Text('Sending OTP'),
+                        action: SnackBarAction(
+                          label: 'Dismiss',
+                          onPressed: () {},
+                        ),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     } else {
                       final snackBar = SnackBar(
                         content: const Text('Please enter your number!'),
