@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:workconstruction/screens/welcome/register.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +38,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.yellow,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: AuthenticationWrapper(),
+        home: const AuthenticationWrapper(),
       ),
     );
   }
@@ -49,9 +52,18 @@ class AuthenticationWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
+    final String phoneNumber = firebaseUser.phoneNumber.toString();
+    final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+    final CollectionReference users =
+        FirebaseFirestore.instance.collection('users');
+    final Future<DocumentSnapshot> doc = users.doc(phoneNumber).get();
 
     if (firebaseUser != null) {
-      return Homepage();
+      if (doc != null) {
+        return Homepage(phoneNumber);
+      } else {
+        return Register(phoneNumber);
+      }
     }
     return Login();
   }

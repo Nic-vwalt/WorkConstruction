@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workconstruction/classes/authentication_service.dart';
 import 'package:workconstruction/palette.dart';
+import 'package:workconstruction/screens/welcome/homepage.dart';
 import 'package:workconstruction/screens/welcome/otp.dart';
 import 'package:workconstruction/screens/widgets/widgets.dart';
 import 'package:country_code_picker/country_code_picker.dart';
@@ -15,6 +16,7 @@ class Login extends StatelessWidget {
   final TextEditingController phonenumberController = TextEditingController();
   final TextEditingController otpController = TextEditingController();
   String areaCode = "+27";
+  String phoneNumber = "";
 
   void _onCountryChange(CountryCode countryCode) {
     areaCode = countryCode.toString();
@@ -99,10 +101,11 @@ class Login extends StatelessWidget {
                     print(areaCode);
                     if (phonenumberController.text.isEmpty == false &&
                         phonenumberController.text.length == 9) {
-                      MaterialPageRoute(builder: (context) => OTP());
+                      phoneNumber = phonenumberController.text;
+
+                      //MaterialPageRoute(builder: (context) => OTP());
                       final String fullnumber =
-                          areaCode +
-                              phonenumberController.text;
+                          areaCode + phonenumberController.text;
                       context.read<AuthenticationService>().signIn(
                             phonenumber: fullnumber,
                           );

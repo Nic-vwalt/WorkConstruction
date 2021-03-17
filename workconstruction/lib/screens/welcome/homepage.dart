@@ -6,6 +6,9 @@ import 'package:workconstruction/screens/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class Homepage extends StatelessWidget {
+  final String phoneNumber;
+  const Homepage(this.phoneNumber);
+
   @override
   Widget build(BuildContext context) {
     return Column(

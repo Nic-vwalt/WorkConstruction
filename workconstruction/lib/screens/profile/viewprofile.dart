@@ -9,7 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class viewprofile extends StatefulWidget {
   @override
   final DocumentSnapshot document;
-  viewprofile(this.document);
+  const viewprofile(this.document);
   _viewprofileState createState() => _viewprofileState(document);
 }
 
